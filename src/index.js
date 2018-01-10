@@ -1,11 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'
+import Form from './components/Form.js'
 
-let Hello = 'Hello!';
 render(
-    <div>
-        <div className='hello'>{Hello}</div>
-    </div>,
-
+    <Form />,
     document.getElementById('root')
 );
