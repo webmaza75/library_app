@@ -8,7 +8,12 @@ class MyInput extends React.Component {
     render() {
         return (<div className='input__group'>
             <label className='input__label' htmlFor={this.props.name} >{this.props.label}</label>
-            <input className='input__field'  id={this.props.name} placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.change} />
+            <input
+                className='input__field'
+                id={this.props.name}
+                placeholder={this.props.placeholder}
+                value={this.props.value}
+                onChange={this.props.change} />
             </div>
         );
     }
