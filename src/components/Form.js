@@ -1,7 +1,5 @@
 import React from 'react'
-import TitleInput from './TitleInput'
-import AuthorInput from './AuthorInput'
-import YearInput from './YearInput'
+import MyInput from './MyInput'
 
 class Form extends React.Component {
 
@@ -12,10 +10,10 @@ class Form extends React.Component {
 
     render() {
         return <form onSubmit={this.handleSubmit}>
-            <TitleInput />
-            <AuthorInput />
-            <YearInput />
-            <input type='submit' value='Submit' />
+            <MyInput name='title' label='Название книги:' placeholder='Название книги' />
+            <MyInput name='author' label='Автор:' placeholder='Автор' />
+            <MyInput name='year' label='Год издания:' placeholder='Год издания' />
+            <input type='submit' value='Добавить' />
         </form>;
     }
 }
