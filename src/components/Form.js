@@ -1,6 +1,4 @@
 import React from 'react'
-import MyInput from './MyInput'
-import Table from './Table'
 
 class Form extends React.Component {
 
@@ -10,8 +8,7 @@ class Form extends React.Component {
             author: '',
             year: ''
         },
-        submitted: false,
-        listItems: [{title: 'title1', author: 'author1', year: 'year1'}]
+        submitted: false
     };
 
     handleChangeField = (fieldName, { target: { value } }) => {
@@ -25,34 +22,50 @@ class Form extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({ submitted: true/*, listItems: this.state.listItems.push(this.state.form)*/ });
+
+        if (!this.title.value || !this.author.value || !this.year.value) {
+            alert('Please fill all form fields.');
+            return ;
+        }
+
+        this.props.addBook(this.title.value, this.author.value, this.year.value);
+        this.setState({ submitted: true });
+        [this.title.value, this.author.value, this.year.value] = ['', '', ''];
+
+        this.setState({ form: {title: '', author: '', year: '' } });
     };
 
     render() {
         const { form } = this.state;
 
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <MyInput
+            <form onSubmit={this.handleSubmit} >
+                <div className='input__group'>
+                    <label className='input__label' htmlFor='title' >Название книги:</label>
+                    <input
                         name='title'
-                        label='Название книги:'
                         placeholder='Название книги'
-                        change={this.handleChangeTitle} />
-                    <MyInput
+                        ref={input => this.title = input}
+                        onChange={this.handleChangeTitle} />
+                 </div>
+                <div className='input__group'>
+                    <label className='input__label' htmlFor='author' >Автор:</label>
+                    <input
                         name='author'
-                        label='Автор:'
                         placeholder='Автор'
-                        change={this.handleChangeAuthor} />
-                    <MyInput
+                        ref={input => this.author = input}
+                        onChange={this.handleChangeAuthor} />
+                </div>
+                <div className='input__group'>
+                    <label className='input__label' htmlFor='year' >Год издания:</label>
+                    <input
                         name='year'
-                        label='Год издания:'
                         placeholder='Год издания'
-                        change={this.handleChangeYear} />
-                    <input type='submit' value='Добавить' />
-                </form>
-                <Table data={this.state.listItems} />
-            </div>
+                        ref={input => this.year = input}
+                        onChange={this.handleChangeYear} />
+                </div>
+                <input type='submit' value='Добавить' />
+            </form>
         );
     }
 }
