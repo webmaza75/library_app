@@ -26,7 +26,7 @@ class Form extends React.Component {
     handleChangeAuthor = this.handleChangeField.bind(null, 'author');
     handleChangeYear = this.handleChangeField.bind(null, 'year');
 
-    addBookEvent = (e) => {
+    addBookEvent = () => {
         const { form } = this.state;
 
         if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
@@ -41,7 +41,7 @@ class Form extends React.Component {
         this.setState({ form: {title: '', author: '', year: '' } });
     }
 
-    editBookEvent = (e) => {
+    editBookEvent = () => {
         const { form } = this.state;
 
         if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
