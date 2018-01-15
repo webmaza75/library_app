@@ -8,10 +8,20 @@ class Row extends React.Component {
     render() {
         const { data } = this.props;
         return (
-            <tr key={this.props.index} >
+            <tr>
                 <td>{data.title}</td>
                 <td>{data.author}</td>
                 <td>{data.year}</td>
+                <td>
+                    <button onClick={this.props.selectBook.bind(this, this.props.index)}>
+                        Edit
+                    </button>
+                </td>
+                <td>
+                    <button onClick={this.props.deleteBook.bind(this, this.props.index)}>
+                        Delete
+                    </button>
+                </td>
             </tr>
         );
     }
