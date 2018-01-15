@@ -23,7 +23,7 @@ class Form extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!this.title.value || !this.author.value || !this.year.value) {
+        if (!this.title.value.trim() || !this.author.value.trim() || !this.year.value.trim()) {
             alert('Please fill all form fields.');
             return ;
         }
