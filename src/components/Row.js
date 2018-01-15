@@ -13,12 +13,12 @@ class Row extends React.Component {
                 <td>{data.author}</td>
                 <td>{data.year}</td>
                 <td>
-                    <button onClick={this.props.selectBook.bind(this, this.props.index)}>
+                    <button onClick={this.props.selectBook.bind(this, data)}>
                         Edit
                     </button>
                 </td>
                 <td>
-                    <button onClick={this.props.deleteBook.bind(this, this.props.index)}>
+                    <button onClick={this.props.deleteBook.bind(this, data)}>
                         Delete
                     </button>
                 </td>

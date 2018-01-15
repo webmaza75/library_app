@@ -7,43 +7,47 @@ class LibraryBox extends React.Component {
 
     state = {
         listItems: this.props.listItems,
-        item: {}
+        item: {},
+        maxId: this.props.listItems.length > 0 ? this.props.listItems[this.props.listItems.length - 1].id : -1
     };
+
+    generateCounter = () => ++this.state.maxId;
 
     addBook = (bookTitle, bookAuthor, bookYear) => {
         let book = {
+            id: this.generateCounter(),
             title: bookTitle,
             author: bookAuthor,
             year: bookYear
         };
 
         this.setState({
-            listItems: this.state.listItems.concat([book])
+            listItems: [...this.state.listItems, book],
+            maxId: book.id
         });
     }
 
-    selectBook(idBook) {
+    selectBook(book) {
+        this.setState({
+            item: book
+        });
+    }
 
-        let item = this.state.listItems[idBook];
-        item.id = idBook;
+    editBook = (bookTitle, bookAuthor, bookYear) => {
+        //const list = this.state.listItems;
+        let index = this.state.listItems.indexOf(this.state.item);
+        let book = this.state.listItems[index];
+
+        book.title = bookTitle; book.author = bookAuthor; book.year = bookYear;
 
         this.setState({
-            item: item
-        });
-    }
-
-    editBook = (idBook, bookTitle, bookAuthor, bookYear) => {
-        const list = this.state.listItems;
-        list[idBook] = {title: bookTitle, author: bookAuthor, year: bookYear};
-
-        this.setState({
-            listItems: list
+            listItems: this.state.listItems //list
         });
     }
 
 
-    deleteBook(idBook) {
-        let listItems = this.state.listItems.filter((item, index) => index != idBook);
+    deleteBook(book) {
+        let listItems = this.state.listItems.filter((item) => item.id != book.id);
 
         this.setState({
             listItems: listItems

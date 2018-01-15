@@ -9,12 +9,11 @@ class Form extends React.Component {
             year: ''
         },
         submitted: false,
-        item: {},
-        currentId: null
+        item: {}
     };
     
     componentWillReceiveProps (nextProps) {
-        this.setState({form: nextProps.item, currentId: nextProps.item.id});
+        this.setState({form: nextProps.item});
     }
 
     handleChangeField = (fieldName, { target: { value } }) => {
@@ -50,35 +49,14 @@ class Form extends React.Component {
         }
 
 
-        this.props.editBook(this.state.item.id, form.title, form.author, form.year);
-
-        //this.setState({ submitted: true });
-        //[form.title, form.author, form.year] = ['', '', ''];
-
-        this.setState({ form: {title: '', author: '', year: '' } });
-    }
-   /*
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const { form } = this.state;
-
-        if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
-            alert('Please fill all form fields.');
-            return ;
-        }
-
-        if (Object.keys(this.state.item).length == 0) {
-            this.props.addBook(form.title, form.author, form.year);
-        } else {
-            this.props.editBook(this.state.item.id, form.title, form.author, form.year);
-        }
+        this.props.editBook(form.title, form.author, form.year);
 
         this.setState({ submitted: true });
         [form.title, form.author, form.year] = ['', '', ''];
 
         this.setState({ form: {title: '', author: '', year: '' } });
-    };
-*/
+    }
+
     render() {
         const { form } = this.state;
 
