@@ -7,13 +7,24 @@ class Table extends React.Component {
     }
 
     render() {
-        const items = this.props.data.map(function(item,index){
-            return <Row key={index} data={item} />;
+        const deleteBook = this.props.deleteBook;
+        const selectBook = this.props.selectBook;
+
+        const items = this.props.data.map(function(item, index) {
+            return <Row 
+                key={index} 
+                index={index} 
+                data={item} 
+                deleteBook={deleteBook} 
+                selectBook={selectBook} />;
         });
+        
 
         return (
             <table>
-                {items}
+                <tbody>
+                    {items}
+                </tbody>
             </table>
         );
     }

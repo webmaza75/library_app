@@ -8,52 +8,96 @@ class Form extends React.Component {
             author: '',
             year: ''
         },
-        submitted: false
+        submitted: false,
+        item: {},
+        currentId: null
     };
+    
+    componentWillReceiveProps (nextProps) {
+        this.setState({form: nextProps.item, currentId: nextProps.item.id});
+    }
 
     handleChangeField = (fieldName, { target: { value } }) => {
         const { form } = this.state;
         this.setState({ form: { ...form, [fieldName]: value } });
     };
-
+    
     handleChangeTitle = this.handleChangeField.bind(null, 'title');
     handleChangeAuthor = this.handleChangeField.bind(null, 'author');
     handleChangeYear = this.handleChangeField.bind(null, 'year');
 
-    handleSubmit = (e) => {
-        e.preventDefault();
+    addBookEvent = (e) => {
+        const { form } = this.state;
 
-        if (!this.title.value.trim() || !this.author.value.trim() || !this.year.value.trim()) {
+        if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
             alert('Please fill all form fields.');
             return ;
         }
 
-        this.props.addBook(this.title.value, this.author.value, this.year.value);
+        this.props.addBook(form.title, form.author, form.year);
         this.setState({ submitted: true });
-        [this.title.value, this.author.value, this.year.value] = ['', '', ''];
+        [form.title, form.author, form.year] = ['', '', ''];
+
+        this.setState({ form: {title: '', author: '', year: '' } });
+    }
+
+    editBookEvent = (e) => {
+        const { form } = this.state;
+
+        if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
+            alert('Please fill all form fields.');
+            return ;
+        }
+
+
+        this.props.editBook(this.state.item.id, form.title, form.author, form.year);
+
+        //this.setState({ submitted: true });
+        //[form.title, form.author, form.year] = ['', '', ''];
+
+        this.setState({ form: {title: '', author: '', year: '' } });
+    }
+   /*
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const { form } = this.state;
+
+        if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
+            alert('Please fill all form fields.');
+            return ;
+        }
+
+        if (Object.keys(this.state.item).length == 0) {
+            this.props.addBook(form.title, form.author, form.year);
+        } else {
+            this.props.editBook(this.state.item.id, form.title, form.author, form.year);
+        }
+
+        this.setState({ submitted: true });
+        [form.title, form.author, form.year] = ['', '', ''];
 
         this.setState({ form: {title: '', author: '', year: '' } });
     };
-
+*/
     render() {
         const { form } = this.state;
 
         return (
-            <form onSubmit={this.handleSubmit} >
+            <form>
                 <div className='input__group'>
                     <label className='input__label' htmlFor='title' >Название книги:</label>
                     <input
                         name='title'
                         placeholder='Название книги'
-                        ref={input => this.title = input}
+                        value = {form.title}
                         onChange={this.handleChangeTitle} />
-                 </div>
+                </div>
                 <div className='input__group'>
                     <label className='input__label' htmlFor='author' >Автор:</label>
                     <input
                         name='author'
                         placeholder='Автор'
-                        ref={input => this.author = input}
+                        value = {form.author}                        
                         onChange={this.handleChangeAuthor} />
                 </div>
                 <div className='input__group'>
@@ -61,10 +105,11 @@ class Form extends React.Component {
                     <input
                         name='year'
                         placeholder='Год издания'
-                        ref={input => this.year = input}
+                        value = {form.year}                                                
                         onChange={this.handleChangeYear} />
                 </div>
-                <input type='submit' value='Добавить' />
+                <input type='button' value='Добавить' onClick={this.addBookEvent} />
+                <input type='button' value='Редактировать' onClick={this.editBookEvent} />
             </form>
         );
     }
