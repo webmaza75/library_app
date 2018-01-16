@@ -1,6 +1,14 @@
 import React from 'react'
 import Form from './Form'
 import Table from './Table'
+import { connect } from 'react-redux'
+
+function mapStateToProps (state) {
+    return {
+      listItems: state.listItems,
+      form: state.form
+    }
+  }
 
 
 class LibraryBox extends React.Component {
@@ -60,16 +68,20 @@ class LibraryBox extends React.Component {
 
     render() {
 
+        const { form } = this.props.form;
+        const { listItems } = this.props.listItems;
+
         return (
             <div>
-                <Form addBook={this.addBook} item={this.state.item} editBook={this.editBook} />
-                <Table 
+                <Form /*addBook={this.addBook} item={this.state.item} editBook={this.editBook}*/ />
+                <Table /*
                     data={this.state.listItems} 
                     deleteBook={this.deleteBook.bind(this)}
-                    selectBook={this.selectBook.bind(this)} />
+                    selectBook={this.selectBook.bind(this)}*/ /> 
             </div>
         );
     }
 }
 
-export default LibraryBox;
+//export default LibraryBox;
+export default connect(mapStateToProps, null)(LibraryBox);

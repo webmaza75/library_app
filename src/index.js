@@ -1,6 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 import LibraryBox from './components/LibraryBox.js'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import combineReducers from './reducers/index.js'
 
 import './css/style.css';
 
@@ -10,6 +13,8 @@ const listItems = [
 ];
 
 render(
-    <LibraryBox listItems = {listItems} />,
+    <Provider store = { createStore(combineReducers) } >
+        <LibraryBox listItems = {listItems} />
+    </Provider>,
     document.getElementById('root')
 );
