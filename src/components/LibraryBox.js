@@ -13,17 +13,14 @@ class LibraryBox extends React.Component {
 
     generateCounter = () => ++this.state.maxId;
 
-    addBook = (bookTitle, bookAuthor, bookYear) => {
-        let book = {
-            id: this.generateCounter(),
-            title: bookTitle,
-            author: bookAuthor,
-            year: bookYear
-        };
+    addBook = (item) => {
+
+        item.id = this.generateCounter();
 
         this.setState({
-            listItems: [...this.state.listItems, book],
-            maxId: book.id
+            listItems: [...this.state.listItems, item],
+            maxId: item.id,
+            item: null
         });
     }
 
@@ -33,15 +30,15 @@ class LibraryBox extends React.Component {
         });
     }
 
-    editBook = (bookTitle, bookAuthor, bookYear) => {
-        //const list = this.state.listItems;
-        let index = this.state.listItems.indexOf(this.state.item);
-        let book = this.state.listItems[index];
+    editBook = (item) => {
 
-        book.title = bookTitle; book.author = bookAuthor; book.year = bookYear;
+        let index = this.state.listItems.indexOf(this.state.item);
+        let tmpList = [...this.state.listItems];
+        tmpList[index] = item;
 
         this.setState({
-            listItems: this.state.listItems //list
+            listItems: tmpList,
+            item: null 
         });
     }
 
