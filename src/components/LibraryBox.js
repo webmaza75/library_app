@@ -33,6 +33,12 @@ class LibraryBox extends React.Component {
     editBook = (item) => {
 
         let index = this.state.listItems.indexOf(this.state.item);
+
+        if (index < 0) {
+            alert('Невозможно сохранить, книга не найдена! Попробуйте еще раз.');
+            return;
+        }
+
         let tmpList = [...this.state.listItems];
         tmpList[index] = item;
 
