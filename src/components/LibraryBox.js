@@ -11,7 +11,7 @@ class LibraryBox extends React.Component {
         maxId: this.props.listItems.length > 0 ? this.props.listItems[this.props.listItems.length - 1].id : -1
     };
 
-    generateCounter = () => ++this.state.maxId;
+    generateCounter = () => this.state.maxId + 1;
 
     addBook = (item) => {
 

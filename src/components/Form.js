@@ -14,6 +14,14 @@ class Form extends React.Component {
         submitted: false,
         item: {}
     };
+
+    isValidForm (form) {
+        if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
+            alert('Please fill all form fields.');
+            return false;
+        }
+        return true;
+    }
     
     componentWillReceiveProps (nextProps) {
         if( nextProps.item ) {
@@ -33,28 +41,21 @@ class Form extends React.Component {
     addBookEvent = () => {
         const { form } = this.state;
 
-        if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
-            alert('Please fill all form fields.');
-            return ;
+        if (this.isValidForm(form) ) {
+            this.props.addBook(form);
+            this.setState({ submitted: true, item: {} });
+
+            this.setState({ form: emptyItem });
         }
-
-        this.props.addBook(form);
-        this.setState({ submitted: true, item: {} });
-
-        this.setState({ form: emptyItem });
     }
 
     editBookEvent = () => {
         const { form } = this.state;
 
-        if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
-            alert('Please fill all form fields.');
-            return;
+        if (this.isValidForm(form) ) {
+            this.props.editBook(form);
+            this.setState({ form: emptyItem });
         }
-
-        this.props.editBook(form);
-
-        this.setState({ form: emptyItem });
     }
 
     render() {
