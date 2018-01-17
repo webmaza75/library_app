@@ -1,9 +1,7 @@
 import React from 'react'
 import Row from './Row'
 import { connect } from 'react-redux'
-
-const SELECT_ITEM = 'select_item';
-const DELETE_ITEM = 'delete_item';
+import {initialState, emptyItem, SELECT_ITEM, DELETE_ITEM, ADD_ITEM, EDIT_ITEM} from '../reducers/constants.js'
 
 class Table extends React.Component {
     constructor(props) {

@@ -1,15 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-const ADD_ITEM = 'add_item';
-const EDIT_ITEM = 'edit_item';
-
-const emptyItem = {
-    id: null,
-    title: '',
-    author: '',
-    year: ''
-}
+import {initialState, emptyItem, ADD_ITEM, EDIT_ITEM} from '../reducers/constants.js'
 
 let counter = (function() {
 	var count = 2;
@@ -21,8 +12,8 @@ let counter = (function() {
 class Form extends React.Component {
 
     state = {
-        form: emptyItem,
-        item: {}
+        form: emptyItem
+        //item: {}
     }
 
     isValidForm (form) {
