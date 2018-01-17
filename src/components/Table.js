@@ -19,8 +19,8 @@ class Table extends React.Component {
                 key={index} 
                 index={index} 
                 data={item} 
-                deleteBook={ this.deleteBook.bind(this, item) }  //deleteBook={deleteBook} 
-                selectBook={ this.selectBook.bind(this, item) } />;
+                deleteBook={ this.props.deleteBook.bind(this, item) }  //deleteBook={deleteBook} 
+                selectBook={ this.props.selectBook.bind(this, item) } />;
         });
         
 
