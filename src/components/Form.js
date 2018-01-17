@@ -1,20 +1,29 @@
 import React from 'react'
-//import { connect } from 'react-redux'
+import { connect } from 'react-redux'
+
+const ADD_ITEM = 'add_item';
+const EDIT_ITEM = 'edit_item';
 
 const emptyItem = {
+    id: null,
     title: '',
     author: '',
-    year: '',
-    id: null
-};
+    year: ''
+}
+
+let counter = (function() {
+	var count = 2;
+	return  function () {
+		return ++count;
+	}
+})();
 
 class Form extends React.Component {
 
     state = {
         form: emptyItem,
-        submitted: false,
         item: {}
-    };
+    }
 
     isValidForm (form) {
         if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
@@ -44,14 +53,19 @@ class Form extends React.Component {
 
         if (this.isValidForm(form) ) {
             this.props.addBook(form);
-            this.setState({ submitted: true, item: {} });
-
-            this.setState({ form: emptyItem });
+            this.setState({ form: emptyItem, item: {} });
         }
     }
 
     editBookEvent = () => {
-        const { form } = this.state;
+        const { form } = this.state; //this.props.selectItem;
+        const { listItems } = this.props.listItems;
+        let index = listItems.indexOf(this.props.selectItem);
+
+        if (index < 0) {
+            alert('Невозможно сохранить, книга не найдена! Попробуйте еще раз.');
+            return;
+        }
 
         if (this.isValidForm(form) ) {
             this.props.editBook(form);
@@ -97,4 +111,33 @@ class Form extends React.Component {
     }
 }
 
-export default Form;
+function mapStateToProps(state) {
+    return {
+        item: state.selectItem,
+        listItems: state.listItems,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addBook: function (item) {
+            item.id = counter();
+            const action = {
+                type: ADD_ITEM,
+                payload: item
+            };
+            dispatch(action);
+        },
+        editBook: function (item) {
+
+            const action = {
+                type: EDIT_ITEM,
+                payload: item
+            };
+            dispatch(action);
+        }
+        
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

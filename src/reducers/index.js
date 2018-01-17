@@ -2,7 +2,9 @@ import { combineReducers } from 'redux'
 import table from './table'
 import form from './form'
 
-export default combineReducers({
+const rootReducer =  combineReducers({
     table,
     form
-  })
+  });
+
+  export default rootReducer;

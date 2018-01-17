@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import LibraryBox from './components/LibraryBox.js'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import combineReducers from './reducers/index.js'
+import rootReducer from './reducers/index.js'
 
 import './css/style.css';
 
@@ -12,8 +12,10 @@ const listItems = [
     {id: 2, title: 'title2', author: 'author2', year: 'year2'}
 ];
 
+
+
 render(
-    <Provider store = { createStore(combineReducers) } >
+    <Provider store = {createStore(rootReducer)} >
         <LibraryBox listItems = {listItems} />
     </Provider>,
     document.getElementById('root')
