@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {initialState, emptyItem, ADD_ITEM, EDIT_ITEM} from '../reducers/constants.js'
+import {emptyItem, ADD_ITEM, EDIT_ITEM} from '../reducers/constants.js'
+
 
 let counter = (function() {
 	var count = 2;
@@ -43,21 +44,20 @@ class Form extends React.Component {
         const { form } = this.state;
 
         if (this.isValidForm(form) ) {
+
             this.props.addBook(form);
             this.setState({ form: emptyItem, item: {} });
         }
     }
 
     editBookEvent = () => {
-        const { form } = this.state; //this.props.selectItem;
-        const { listItems } = this.props.listItems;
-        let index = listItems.indexOf(this.props.selectItem);
-
+        const { form } = this.state;
+/*
         if (index < 0) {
             alert('Невозможно сохранить, книга не найдена! Попробуйте еще раз.');
             return;
         }
-
+*/
         if (this.isValidForm(form) ) {
             this.props.editBook(form);
             this.setState({ form: emptyItem });
@@ -104,8 +104,8 @@ class Form extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        item: state.selectItem,
-        listItems: state.listItems,
+        item: state.form.selectItem,
+        listItems: state.form.listItems,
     }
 }
 

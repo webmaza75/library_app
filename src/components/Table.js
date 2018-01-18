@@ -1,7 +1,7 @@
 import React from 'react'
 import Row from './Row'
 import { connect } from 'react-redux'
-import {initialState, emptyItem, SELECT_ITEM, DELETE_ITEM, ADD_ITEM, EDIT_ITEM} from '../reducers/constants.js'
+import {SELECT_ITEM, DELETE_ITEM} from '../reducers/constants.js'
 
 class Table extends React.Component {
     constructor(props) {
@@ -9,16 +9,16 @@ class Table extends React.Component {
     }
 
     render() {
-        //const deleteBook = this.props.deleteBook;
-       // const selectBook = this.props.selectBook;
+        const deleteBook = this.props.deleteBook;
+        const selectBook = this.props.selectBook;
 
         const items = this.props.data.map(function(item, index) { //state
             return <Row 
                 key={index} 
                 index={index} 
                 data={item} 
-                deleteBook={ this.props.deleteBook.bind(this, item) }  //deleteBook={deleteBook} 
-                selectBook={ this.props.selectBook.bind(this, item) } />;
+                deleteBook={ deleteBook.bind(this, item) }  //deleteBook={deleteBook} 
+                selectBook={ selectBook.bind(this, item) } />;
         });
         
 
@@ -33,10 +33,14 @@ class Table extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { data: state.listItems };
+    return { 
+        data: state.table.listItems,
+        item: state.table.selectItem
+    };
 }
 
 function mapDispatchToProps(dispatch) {
+
     return { 
         selectBook: function (item) {
 
