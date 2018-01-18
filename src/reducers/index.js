@@ -1,10 +1,22 @@
-import { combineReducers } from 'redux'
-import table from './table'
+//import { combineReducers } from 'redux'
 import form from './form'
 
-const rootReducer =  combineReducers({
-    table,
-    form
-  });
+export const globalState = {
+  table: {
+    listItems: [
+      {id: 1, title: 'title1', author: 'author1', year: 'year1'},
+      {id: 2, title: 'title2', author: 'author2', year: 'year2'}
+    ],
+    selectItem: null
+  } ,
+  form: {
+    form: {
+    id: null,
+    title: '',
+    author: '',
+    year: ''
+    }
+  }
+} 
 
-  export default rootReducer;
+export const rootReducer =  form;

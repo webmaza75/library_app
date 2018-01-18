@@ -14,7 +14,6 @@ class Form extends React.Component {
 
     state = {
         form: emptyItem
-        //item: {}
     }
 
     isValidForm (form) {
@@ -104,8 +103,8 @@ class Form extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        item: state.form.selectItem,
-        listItems: state.form.listItems,
+        item: state.table.selectItem,
+        listItems: state.table.listItems,
     }
 }
 
