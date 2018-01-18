@@ -33,7 +33,6 @@ class Table extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state);
     return { 
         data: state.table.listItems,
         item: state.table.selectItem

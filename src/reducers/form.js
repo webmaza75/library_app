@@ -4,6 +4,7 @@ import {
   SELECT_ITEM,
   DELETE_ITEM
 } from './constants.js'
+
 import { globalState } from './index'
 
 
@@ -17,11 +18,10 @@ export default function form(state = globalState, action) {
       newState.table.listItems = [...newState.table.listItems, action.payload];
       break;
     case EDIT_ITEM:
-      // console.log(newState.table.selectItem);
-      // index = newState.table.selectItem.id ? newState.table.listItems.indexOf(newState.table.selectItem) : -1;
       tmplistItems = [...newState.table.listItems];
-      tmplistItems[action.payload.id] = action.payload;
+      tmplistItems[tmplistItems.indexOf(newState.table.selectItem)] = action.payload;
       newState.table.listItems = tmplistItems;
+      newState.table.selectItem = null;
       break;
     case SELECT_ITEM:
       newState.table.selectItem = action.payload;
@@ -34,6 +34,5 @@ export default function form(state = globalState, action) {
     default:
       return state;
   }
-  //console.log(globalState);
   return newState;
 }
