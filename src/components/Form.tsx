@@ -1,22 +1,35 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {emptyItem, ADD_ITEM, EDIT_ITEM} from '../reducers/constants.js'
+import {emptyItem, ADD_ITEM, EDIT_ITEM} from '../reducers/constants'
+import { IBook, IGlobalState } from '../interfaces/interfaces';
 
 
 let counter = (function() {
-	var count = 2;
+	var count: number = 2;
 	return  function () {
 		return ++count;
 	}
 })();
 
-class Form extends React.Component {
+interface IProps {
+    form : IBook;
+    nextProps: any;
+    addBook: (item : IBook) => void;
+    editBook: (item : IBook) => void;
+}
+
+interface IState {
+    item: IBook|null,
+    listItems: IBook[]|null,
+}
+
+class Form extends React.Component <IProps, IState> {
 
     state = {
         form: emptyItem
     }
 
-    isValidForm (form) {
+    isValidForm (form : IBook) {
         if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
             alert('Please fill all form fields.');
             return false;
@@ -101,7 +114,7 @@ class Form extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state : IGlobalState) {
     return {
         item: state.table.selectItem,
         listItems: state.table.listItems,

@@ -2,7 +2,7 @@ import React from 'react'
 import Form from './Form'
 import Table from './Table'
 
-class LibraryBox extends React.Component {
+class LibraryBox extends React.Component <any, any> {
 
     render() {
 

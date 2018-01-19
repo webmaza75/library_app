@@ -3,15 +3,16 @@ import {
   EDIT_ITEM,
   SELECT_ITEM,
   DELETE_ITEM
-} from './constants.js'
+} from './constants'
+import {IGlobalState, IBook, IAction } from '../interfaces/interfaces'
 
 import { globalState } from './index'
 
 
-export default function form(state = globalState, action) {
+export default function form(state: IGlobalState = globalState, action: IAction): IGlobalState {
 
-  let newState = { ...state };
-  let tmplistItems;
+  let newState: IGlobalState = { ...state };
+  let tmplistItems: IBook[];
 
   switch (action.type) {
     case ADD_ITEM:

@@ -8,7 +8,7 @@ export const globalState = {
       {id: 2, title: 'title2', author: 'author2', year: 'year2'}
     ],
     selectItem: null
-  } ,
+  }, 
   form: {
     form: {
     id: null,

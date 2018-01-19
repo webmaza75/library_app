@@ -1,10 +1,24 @@
 import React from 'react'
 import Row from './Row'
 import { connect } from 'react-redux'
-import {SELECT_ITEM, DELETE_ITEM} from '../reducers/constants.js'
+import {SELECT_ITEM, DELETE_ITEM} from '../reducers/constants'
+import { IBook, IGlobalState } from '../interfaces/interfaces';
 
-class Table extends React.Component {
-    constructor(props) {
+interface IProps {
+    form : IBook;
+    props : IGlobalState;
+    nextProps: any;
+    deleteBook: (item : IBook) => void;
+    selectBook: (item : IBook) => void;
+}
+
+interface IState {
+    item: IBook|null,
+    listItems: IBook[]|null,
+}
+
+class Table extends React.Component <IProps, IState> {
+    constructor(props : IProps) {
         super(props);
     }
 
@@ -12,7 +26,7 @@ class Table extends React.Component {
         const deleteBook = this.props.deleteBook;
         const selectBook = this.props.selectBook;
 
-        const items = this.props.data.map(function(item, index) { //state
+        const items = this.props.data.map(function(item : IBook, index) { //state
             return <Row 
                 key={index} 
                 index={index} 
@@ -32,7 +46,7 @@ class Table extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state : IGlobalState) {
     return { 
         data: state.table.listItems,
         item: state.table.selectItem
@@ -42,7 +56,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 
     return { 
-        selectBook: function (item) {
+        selectBook: function (item : IBook) {
 
             const action = {
                 type: SELECT_ITEM,
@@ -50,7 +64,7 @@ function mapDispatchToProps(dispatch) {
             };
             dispatch(action);
         },
-        deleteBook: function (item) {
+        deleteBook: function (item : IBook) {
             
             const action = {
                 type: DELETE_ITEM,

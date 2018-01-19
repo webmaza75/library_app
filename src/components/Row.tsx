@@ -1,7 +1,11 @@
 import React from 'react'
 
-class Row extends React.Component {
-    constructor(props) {
+interface IProps {
+    props: any;
+}
+
+class Row extends React.Component <IProps, any> {
+    constructor(props : IProps) {
         super(props);
     }
 
