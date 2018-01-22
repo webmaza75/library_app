@@ -1,23 +1,19 @@
 import * as React from 'react'
 import Row from './Row'
 import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
 import {SELECT_ITEM, DELETE_ITEM} from '../reducers/constants'
 import { IBook, IGlobalState, IAction } from '../interfaces/interfaces';
 
 interface IProps {
-    form: IBook,
-    props: IGlobalState,
-    nextProps: any,
     data: IBook[],
     deleteBook: (item: IBook) => void,
     selectBook: (item: IBook) => void,
-    action: IAction
 }
 
 interface IState {
     item: IBook|null,
     listItems: IBook[]|null,
-    action: IAction
 }
 
 class Table extends React.Component <IProps, IState> {
@@ -51,15 +47,14 @@ class Table extends React.Component <IProps, IState> {
 
 function mapStateToProps(state: IGlobalState) {
     return { 
-        data: state.table.listItems,
-        item: state.table.selectItem
+        data: state.table.listItems
     };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch<any>) {
 
     return { 
-        selectBook: function (item: IBook) {
+        selectBook: (item: IBook) => {
 
             const action: IAction = {
                 type: SELECT_ITEM,
@@ -67,7 +62,7 @@ function mapDispatchToProps(dispatch) {
             };
             dispatch(action);
         },
-        deleteBook: function (item: IBook) {
+        deleteBook: (item: IBook) => {
             
             const action = {
                 type: DELETE_ITEM,

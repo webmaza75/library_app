@@ -2,12 +2,13 @@
     "version": "2.1.4",
     "compilerOptions": {
       "module": "commonjs",
-      "target": "es5",
+      "target": "es6",
       "jsx": "react",
       "sourceMap": true,
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "outDir": "dist"
+      "outDir": "dist",
+      "allowJs": true
     },
     "exclude": [
       "dist",

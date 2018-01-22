@@ -2,10 +2,11 @@ import * as React from 'react'
 import { IBook, IGlobalState } from '../interfaces/interfaces';
 
 interface IProps {
-    props: any;
-    data: IBook;
-    selectBook: (item: IBook) => void;
-    deleteBook: (item: IBook) => void;
+    data: IBook,
+    selectBook: (item: IBook) => void,
+    deleteBook: (item: IBook) => void,
+    key: number,
+    index: number
 }
 
 class Row extends React.Component <IProps, any> {

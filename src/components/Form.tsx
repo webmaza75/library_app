@@ -22,8 +22,8 @@ interface IProps {
 
 interface IState {
     form: IBook,
-    item: IBook|null,
-    listItems: IBook[]|null,
+    item?: IBook,
+    listItems?: IBook[],
 }
 
 class Form extends React.Component <IProps, IState> {
@@ -73,7 +73,7 @@ class Form extends React.Component <IProps, IState> {
             this.props.addBook(form);
             this.setState({ 
                 form: emptyItem, 
-                item: {} 
+                item: null
             });
         }
     }
