@@ -2,7 +2,7 @@
 import form from './form'
 import { IGlobalState } from '../interfaces/interfaces'
 
-export const globalState: IGlobalState = {
+export const globalState = {
   table: {
     listItems: [
       {id: 1, title: 'title1', author: 'author1', year: 'year1'},

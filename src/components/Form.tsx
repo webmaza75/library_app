@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import {emptyItem, ADD_ITEM, EDIT_ITEM} from '../reducers/constants'
-import { IBook, IGlobalState } from '../interfaces/interfaces';
+import { IBook, IGlobalState, IAction } from '../interfaces/interfaces';
 
 
 let counter = (function() {
@@ -12,8 +12,8 @@ let counter = (function() {
 })();
 
 interface IProps {
-    form: IBook,
-    nextProps: any,
+    //form: IBook,
+    //nextProps: any,
     addBook: (item: IBook) => void,
     editBook: (item: IBook) => void,
     item: IBook,
@@ -24,6 +24,8 @@ interface IState {
     form: IBook,
     item?: IBook,
     listItems?: IBook[],
+    addBook: (item: IBook) => void,
+    editBook: (item: IBook) => void,
 }
 
 class Form extends React.Component <IProps, IState> {
@@ -130,7 +132,7 @@ class Form extends React.Component <IProps, IState> {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: IGlobalState) {
     return {
         item: state.table.selectItem,
         listItems: state.table.listItems,
@@ -139,17 +141,17 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addBook: function (item) {
+        addBook: function (item: IBook) {
             item.id = counter();
-            const action = {
+            const action: IAction = {
                 type: ADD_ITEM,
                 payload: item
             };
             dispatch(action);
         },
-        editBook: function (item) {
+        editBook: function (item: IBook) {
 
-            const action = {
+            const action: IAction = {
                 type: EDIT_ITEM,
                 payload: item
             };

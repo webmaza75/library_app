@@ -64,7 +64,7 @@ function mapDispatchToProps(dispatch: Dispatch<any>) {
         },
         deleteBook: (item: IBook) => {
             
-            const action = {
+            const action: IAction = {
                 type: DELETE_ITEM,
                 payload: item
             };

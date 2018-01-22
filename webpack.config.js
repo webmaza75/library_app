@@ -21,6 +21,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(), //добавить поддержку hot-reload
     new NpmInstallPlugin()
   ],
+  resolve: {
+    // changed from extensions: [".js", ".jsx"]
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
+  },
   module: {
     preLoaders: [
       {
@@ -51,5 +55,5 @@ module.exports = {
     postcss: function() {
       return [autoprefixer, precss];
     }
-  }
+  },
 }
