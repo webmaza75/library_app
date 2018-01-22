@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 import {emptyItem, ADD_ITEM, EDIT_ITEM} from '../reducers/constants'
 import { IBook, IGlobalState } from '../interfaces/interfaces';
@@ -12,24 +12,31 @@ let counter = (function() {
 })();
 
 interface IProps {
-    form : IBook;
-    nextProps: any;
-    addBook: (item : IBook) => void;
-    editBook: (item : IBook) => void;
+    form: IBook,
+    nextProps: any,
+    addBook: (item: IBook) => void,
+    editBook: (item: IBook) => void,
+    item: IBook,
+    listItems: IBook[]
 }
 
 interface IState {
+    form: IBook,
     item: IBook|null,
     listItems: IBook[]|null,
 }
 
 class Form extends React.Component <IProps, IState> {
 
-    state = {
+    constructor (props: IProps) {
+        super(props);
+    }
+
+    state: any = {
         form: emptyItem
     }
 
-    isValidForm (form : IBook) {
+    isValidForm (form) {
         if (!form.title.trim() || !form.author.trim() || !form.year.trim()) {
             alert('Please fill all form fields.');
             return false;
@@ -43,9 +50,15 @@ class Form extends React.Component <IProps, IState> {
         }
     }
 
-    handleChangeField = (fieldName, { target: { value } }) => {
+    handleChangeField = (fieldName, {target: {value}}) => {
         const { form } = this.state;
-        this.setState({ form: { ...form, [fieldName]: value }, item: {} });
+        this.setState({
+            form: {
+                ...form,
+                fieldName: value
+            },
+            item: {}
+        });
     };
     
     handleChangeTitle = this.handleChangeField.bind(null, 'title');
@@ -58,7 +71,10 @@ class Form extends React.Component <IProps, IState> {
         if (this.isValidForm(form) ) {
 
             this.props.addBook(form);
-            this.setState({ form: emptyItem, item: {} });
+            this.setState({ 
+                form: emptyItem, 
+                item: {} 
+            });
         }
     }
 
@@ -114,7 +130,7 @@ class Form extends React.Component <IProps, IState> {
     }
 }
 
-function mapStateToProps(state : IGlobalState) {
+function mapStateToProps(state) {
     return {
         item: state.table.selectItem,
         listItems: state.table.listItems,

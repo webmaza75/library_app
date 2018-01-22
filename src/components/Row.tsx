@@ -1,11 +1,15 @@
-import React from 'react'
+import * as React from 'react'
+import { IBook, IGlobalState } from '../interfaces/interfaces';
 
 interface IProps {
     props: any;
+    data: IBook;
+    selectBook: (item: IBook) => void;
+    deleteBook: (item: IBook) => void;
 }
 
 class Row extends React.Component <IProps, any> {
-    constructor(props : IProps) {
+    constructor(props: IProps) {
         super(props);
     }
 

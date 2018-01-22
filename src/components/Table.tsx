@@ -1,24 +1,27 @@
-import React from 'react'
+import * as React from 'react'
 import Row from './Row'
 import { connect } from 'react-redux'
 import {SELECT_ITEM, DELETE_ITEM} from '../reducers/constants'
-import { IBook, IGlobalState } from '../interfaces/interfaces';
+import { IBook, IGlobalState, IAction } from '../interfaces/interfaces';
 
 interface IProps {
-    form : IBook;
-    props : IGlobalState;
-    nextProps: any;
-    deleteBook: (item : IBook) => void;
-    selectBook: (item : IBook) => void;
+    form: IBook,
+    props: IGlobalState,
+    nextProps: any,
+    data: IBook[],
+    deleteBook: (item: IBook) => void,
+    selectBook: (item: IBook) => void,
+    action: IAction
 }
 
 interface IState {
     item: IBook|null,
     listItems: IBook[]|null,
+    action: IAction
 }
 
 class Table extends React.Component <IProps, IState> {
-    constructor(props : IProps) {
+    constructor(props: IProps) {
         super(props);
     }
 
@@ -26,7 +29,7 @@ class Table extends React.Component <IProps, IState> {
         const deleteBook = this.props.deleteBook;
         const selectBook = this.props.selectBook;
 
-        const items = this.props.data.map(function(item : IBook, index) { //state
+        const items = this.props.data.map(function(item: IBook, index: number) { //state
             return <Row 
                 key={index} 
                 index={index} 
@@ -46,7 +49,7 @@ class Table extends React.Component <IProps, IState> {
     }
 }
 
-function mapStateToProps(state : IGlobalState) {
+function mapStateToProps(state: IGlobalState) {
     return { 
         data: state.table.listItems,
         item: state.table.selectItem
@@ -56,15 +59,15 @@ function mapStateToProps(state : IGlobalState) {
 function mapDispatchToProps(dispatch) {
 
     return { 
-        selectBook: function (item : IBook) {
+        selectBook: function (item: IBook) {
 
-            const action = {
+            const action: IAction = {
                 type: SELECT_ITEM,
                 payload: item
             };
             dispatch(action);
         },
-        deleteBook: function (item : IBook) {
+        deleteBook: function (item: IBook) {
             
             const action = {
                 type: DELETE_ITEM,

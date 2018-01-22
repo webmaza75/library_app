@@ -1,14 +1,15 @@
 //import { combineReducers } from 'redux'
 import form from './form'
+import { IGlobalState } from '../interfaces/interfaces'
 
-export const globalState = {
+export const globalState: IGlobalState = {
   table: {
     listItems: [
       {id: 1, title: 'title1', author: 'author1', year: 'year1'},
       {id: 2, title: 'title2', author: 'author2', year: 'year2'}
     ],
     selectItem: null
-  }, 
+  }/*, 
   form: {
     form: {
     id: null,
@@ -16,7 +17,7 @@ export const globalState = {
     author: '',
     year: ''
     }
-  }
+  }*/
 } 
 
-export const rootReducer =  form;
+export const rootReducer = form;
