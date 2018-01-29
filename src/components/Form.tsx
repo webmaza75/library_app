@@ -82,12 +82,7 @@ class Form extends React.Component <IProps, IState> {
 
     editBookEvent = () => {
         const { form } = this.state;
-/*
-        if (index < 0) {
-            alert('Невозможно сохранить, книга не найдена! Попробуйте еще раз.');
-            return;
-        }
-*/
+
         if (this.isValidForm(form) ) {
             this.props.editBook(form);
             this.setState({ form: emptyItem });
